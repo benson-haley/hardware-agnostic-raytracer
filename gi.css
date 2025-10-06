@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #000000;
+  color: white;
+  padding: 20px;
+}
+
+a {
+  color: #d30000;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: white;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.content p {
+  font-size: 1.1rem;
+  max-width: 75vw;
+  text-align: justify;
+  text-indent: 1.5em; 
+}
+
+.content ul {
+  padding-left: 2.5em;
+  max-width: 75vw;
+}
+
+li {
+  font-size: 1.1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #d30000;
+  border-top: 1px solid #ccc;
+  margin-top: 60px;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  flex-wrap: wrap;
+}
+
+.image-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.image-container img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-container h2 {
+  position: absolute;
+  bottom: 42%;
+  right: 10px;
+  margin: 0;
+  padding: 5px 10px;
+  color: white;
+  font-size: 2.8vw;
+}
+
+.title-overlay {
+  position: absolute;
+  bottom: 50%;
+  right: 10px;
+  margin: 0;
+  padding: 5px 10px;
+  color: white;
+  font-size: 4vw;
+  border-radius: 5px;
+  text-shadow:
+    -4px -4px 0 black,
+     4px -4px 0 black,
+    -4px  4px 0 black,
+     4px  4px 0 black;
+}
+
+.subtitle-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #333;
+}

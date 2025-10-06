@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GI Project Showcase</title>
+  <link rel="stylesheet" href="gi.css" />
+</head>
+<body>
+  <header>
+    <div class="image-container">
+      <img src="header.png" alt="Stylized image of raytraced spheres with floating equations" />
+      <h1 class="title-overlay">Hardware-Agnostic Accelerated Raytracing</h1>
+      <h2>Benson Haley</h2>
+    </div>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>Introduction</h2>
+      <div class="content">
+        <p>This project explores implementing a raytracer that is not tied to acceleration structures from a specific vendor.  Most modern raytracers are accelerated with NVIDIA's <a href="https://developer.nvidia.com/rtx/ray-tracing/optix">OptiX</a> technology, which limits users to machines with an NVIDIA GPU.  However, with the advent of arbitrary GPU kernels (<a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a>, <a href="https://rocm.docs.amd.com/projects/HIP/en/latest/index.html">HIP</a>, etc.) and new universal device standards (<a href="https://www.khronos.org/sycl/">SYCL</a>), it is possible to write hardware-agnostic code that can take advantage of any variety of GPU if one exists.</p>
+        <p>At the core of this project is SYCL, a standard developed by Khronos that defines a common framework for offloading repetitive operations to devices that support parallel computing.  Many implementations of the SYCL standard exist, but this project uses <a href="https://adaptivecpp.github.io/">AdaptiveCpp</a> due to its open-source nature.  There are many benefits to using SYCL over device-specific code:</p>
+        <ul>
+          <li><b>Hardware Agnostic</b>: the SYCL standard supports many varieties of GPUs, and other parallelism models as well</li>
+          <li><b>Future Compatible</b>: new devices can become compliant with the SYCL standard</li>
+          <li><b>Modern C++</b>: much of CUDA resembles pre-11 C++, and using APIs like <a href="https://www.vulkan.org/">Vulkan</a> or <a href="https://devblogs.microsoft.com/directx/landing-page/">DirectX</a> require additional shading languages (<a href="https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language">GLSL</a>, <a href="https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl">HLSL</a>, etc.)</li>
+          <li><b>Open Source</b>: AdaptiveCpp is an open-source implementation of the SYCL standard</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <h2>Architecture</h2>
+      <div class="content">
+        <p>The raytracer follows a typical architecture, where the camera launches a ray of inverse-light through each pixel of the film plane that bounces around the scene to determine the pixel's final color.  Unlike OptiX, which only supports triangle-based meshes, this engine supports spheres and triangles by default and also gives users the ability to add new object types, as well as extend the sphere or triangle object types to include extra vertex information (color, UV coordinates, etc.).</p>
+        <img src="diagram.png" alt="Raytracing illustration" style="width: 400px;" />
+        <p>The underlying architecture requires data to be parallelizable, meaning all object data must be stored in-place in buffers, rather than scattered across the heap.  User-manipulation is performed through a callback interface and a shader interface, both implemented with C++ lambdas.  Callback functions can be passed into the engine upon construction, and procedural textures can be added to objects by implementing shader lambdas which accept an input info structure (containing object and collison data) and return a luminance value.  In order for the engine to be usable with heterogeneous systems, exceptions cannot be used within the engine (although they do not need to be disabled for the remainder of a user's project) and dynamic polymorphism is disallowed (due to virtual tables).  This means that the object polymorphic facilities are implemented using <a href="https://en.cppreference.com/w/cpp/utility/variant">variant</a>s and <a href="https://en.cppreference.com/w/cpp/language/sfinae">SFINAE</a> </p>
+      </div>
+    </section>
+
+    <section id="system">
+      <h2>System</h2>
+      <div class="content">
+        <p>The core of the data parallelism in the system is in C++ standard allocators, extended to perform SYCL allocations, allowing STL <a href="https://en.cppreference.com/w/cpp/container/vector">vector</a>s to be used on SYCL universal shared memory (USM) pointers.  SYCL buffers and accessors are avoided due to their documented inefficiencies when compared to USM pointers.</p>
+        <img src="code.png" alt="C++ code" style="width: 400px;" />
+      </div>
+    </section>
+
+    <section id="dependencies">
+      <h2>Dependencies</h2>
+      <div class="content">
+        <ul>
+          <li>C++20</li>
+          <li>Clang extended with AdaptiveCpp</li>
+          <li>GPU with compute support (for best performance)</li>
+          <li>NVIDIA CUDA Library (for device compatible variant, tuple, optional, array, etc.)</li>
+          <li>Eigen (for efficient vector and matrix math)</li>
+          <li>Happly (to easily load triangle meshes from PLY files)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+      <div class="content">
+        <p>A Whitted-esque scene with a moving sphere runs at ~144 frames per second (although the sample below runs at 30 FPS due to GIF compression).  The default output of the project uses a websocket, which will also reduce the framerate based on connectivity, so for the best results users should route frames to their own client-side output interface.</p>
+        <img src="demo.gif" alt="The raytracer in action" style="width: 600px;" />
+      </div>
+    </section>
+
+    <section id="future-work">
+      <h2>Future Work</h2>
+      <div class="content">
+        <p>In the future, this project could be improved and extended to produce higher fidelity images and shadows by using photon maps or path tracing.  Additionally, the KD-Tree implementation, which currently only runs on the CPU, could be rewritten to function on-device.</p>
+      </div>
+    </section>
+
+     <section id="download">
+      <h2>Download</h2>
+      <div class="content">
+        <p>The project code can be downloaded <a href="gi.zip" download>here</a>.  In the future it will be hosted on GitHub.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Benson Haley</p>
+  </footer>
+</body>
+</html>
