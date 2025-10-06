@@ -1,7 +1,9 @@
-# Hardware-Agnostic Accelerated Raytracing
+# [Website](https://benson-haley.github.io/hardware-agnostic-raytracer/gi.html)
+
+## Hardware-Agnostic Accelerated Raytracing
 Benson Haley
 
-## Dependencies
+### Dependencies
 - C++20
 - Clang extended with AdaptiveCpp
 - GPU with compute support (for best performance)
