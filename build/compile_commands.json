@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/build",
+  "command": "/usr/bin/clang++-18 -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -DHIPSYCL_DEBUG_LEVEL=4 -DWITH_CUDA_BACKEND=ON -I/usr/local/cuda/include -I\"/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/build/_deps/eigen-src\" -isystem /home/bah/AdaptiveCpp/build/install/include -isystem /home/bah/AdaptiveCpp/build/install/include/AdaptiveCpp --cuda-path=/usr/local/cuda -g -std=gnu++23 -O3 --acpp-targets=cuda:sm_89 --acpp-cuda-path=/usr/local/cuda --cuda-path=/usr/local/cuda --cuda-gpu-arch=sm_89 -march=native -o CMakeFiles/gi.dir/src/gi/camera.cpp.o -c \"/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/src/gi/camera.cpp\"",
+  "file": "/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/src/gi/camera.cpp",
+  "output": "CMakeFiles/gi.dir/src/gi/camera.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/build",
+  "command": "/usr/bin/clang++-18 -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -DHIPSYCL_DEBUG_LEVEL=4 -DWITH_CUDA_BACKEND=ON -I/usr/local/cuda/include -I\"/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/build/_deps/eigen-src\" -isystem /home/bah/AdaptiveCpp/build/install/include -isystem /home/bah/AdaptiveCpp/build/install/include/AdaptiveCpp --cuda-path=/usr/local/cuda -g -std=gnu++23 -O3 --acpp-targets=cuda:sm_89 --acpp-cuda-path=/usr/local/cuda --cuda-path=/usr/local/cuda --cuda-gpu-arch=sm_89 -march=native -o CMakeFiles/gi.dir/src/main.cpp.o -c \"/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/src/main.cpp\"",
+  "file": "/mnt/c/Users/bah/Documents/RIT/Semester 7/GI/gi/src/main.cpp",
+  "output": "CMakeFiles/gi.dir/src/main.cpp.o"
+}
+]

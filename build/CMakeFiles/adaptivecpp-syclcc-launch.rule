@@ -1,0 +1,1 @@
+/home/bah/AdaptiveCpp/build/install/lib/cmake/AdaptiveCpp/syclcc-launcher --launcher-cxx-compiler=/usr/bin/clang++-18 --launcher-syclcc=/home/bah/AdaptiveCpp/build/install/bin/acpp 
